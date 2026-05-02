@@ -1,0 +1,32 @@
+name: 📎 Upload demo
+description: Demonstrates the `upload` element type.
+labels: [demo, upload]
+assignees: ['Jane', 'Jon']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The `upload` element renders a file input.
+        Use it to let users attach screenshots, logs, or any other supporting file.
+
+  - type: upload
+    id: any
+    attributes:
+      label: Any file
+      description: No restriction on the type of file.
+
+  - type: upload
+    id: images
+    attributes:
+      label: Images only
+      description: Only image files are accepted.
+    validations:
+      accept: ".png,.jpg,.gif,.svg,.webp"
+
+  - type: upload
+    id: required
+    attributes:
+      label: Required upload
+      description: A file must be attached to submit the form.
+    validations:
+      required: true

@@ -1,0 +1,33 @@
+name: ✏️ Input demo
+description: Demonstrates the `input` element type.
+labels: [demo, input]
+assignees: ['Jane', 'Jon']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The `input` element renders a single-line text field.
+        It is the right choice for short, free-form values like a version number, a URL, or an identifier.
+
+  - type: input
+    id: simple
+    attributes:
+      label: Simple input
+      description: Plain text field, no constraints.
+
+  - type: input
+    id: required
+    attributes:
+      label: Required input
+      description: This field must be filled in to submit the form.
+      placeholder: I am required
+    validations:
+      required: true
+
+  - type: input
+    id: with-default
+    attributes:
+      label: Input with a default value
+      description: The `value` attribute pre-fills the field.
+      value: pre-filled value
+      placeholder: Will be ignored if `value` is set

@@ -1,0 +1,51 @@
+name: 📄 Markdown demo
+description: Demonstrates the `markdown` element type.
+labels: [demo, markdown]
+assignees: ['Jane', 'Jon']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Markdown element
+
+        The `markdown` element renders **static, read-only** content.
+        It is useful for instructions, links to docs, and visual separators.
+
+        It supports the full GitHub-flavored Markdown syntax,
+        including [links](https://docs.github.com), `inline code`, lists, and tables.
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!NOTE]
+        > Useful information that users should know, even when skimming content.
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > Helpful advice for doing things better or more easily.
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > Urgent info that needs immediate user attention to avoid problems.
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!WARNING]
+        > Urgent info that needs immediate user attention to avoid problems.
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!CAUTION]
+        > Advises about risks or negative outcomes of certain actions.
+
+  - type: input
+    id: simple
+    attributes:
+      label: Simple input
+      description: Plain text field, no constraints.

@@ -1,0 +1,73 @@
+name: 🔽 Dropdown demo
+description: Demonstrates the `dropdown` element type.
+labels: [demo, dropdown]
+assignees: ['Jane', 'Jon']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The `dropdown` element renders a select menu.
+        Set `multiple: true` to allow several options to be picked at once.
+
+  - type: dropdown
+    id: simple
+    attributes:
+      label: Simple dropdown
+      description: Single-select dropdown with a default selection.
+      options:
+        - Red
+        - Green
+        - Blue
+        - n/a
+
+  - type: dropdown
+    id: simple-required
+    attributes:
+      label: Simple dropdown (required)
+      description: Single-select dropdown with a default selection.
+      options:
+        - Red
+        - Green
+        - Blue
+        - n/a
+    validations:
+      required: true
+
+  - type: dropdown
+    id: with-default
+    attributes:
+      label: Dropdown with an explicit default
+      description: The `default` attribute is the zero-based index of the pre-selected option.
+      options:
+        - Apple
+        - Banana
+        - Cherry
+      default: 2
+
+  - type: dropdown
+    id: multi
+    attributes:
+      label: Multi-select dropdown
+      description: |
+        With `multiple: true`, the user can pick any number of options.
+      multiple: true
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+
+  - type: dropdown
+    id: multi-required
+    attributes:
+      label: Multi-select dropdown (required)
+      description: |
+        With `multiple: true`, the user can pick any number of options.
+      multiple: true
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true

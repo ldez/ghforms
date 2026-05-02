@@ -1,0 +1,32 @@
+name: ☑️ Checkboxes demo
+description: Demonstrates the `checkboxes` element type.
+labels: [demo, checkboxes]
+assignees: ['Jane', 'Jon']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The `checkboxes` element renders a list of options that can each be toggled independently.
+        Individual options can be marked as required.
+
+  - type: checkboxes
+    id: optional
+    attributes:
+      label: Optional checkboxes
+      description: None of these need to be ticked to submit the form.
+      options:
+        - label: First option
+        - label: Second option
+        - label: Third option
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Terms (with required options)
+      description: Each option marked as required must be ticked.
+      options:
+        - label: I have read the [contributing guide](https://example.com).
+          required: true
+        - label: I have searched [existing issues](https://example.com) and didn't find a duplicate.
+          required: true
+        - label: I'd like to help triage this issue (optional).

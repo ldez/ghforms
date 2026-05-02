@@ -1,0 +1,49 @@
+name: 📝 Textarea demo
+description: Demonstrates the `textarea` element type.
+labels: [demo, textarea]
+assignees: ['Jane', 'Jon']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The `textarea` element renders a multi-line text area.
+        Use it for descriptions, logs, stack traces, or any content that may span several lines.
+
+  - type: textarea
+    id: simple
+    attributes:
+      label: Simple textarea
+      description: Plain multi-line input.
+      placeholder: Type your description here…
+
+  - type: textarea
+    id: required
+    attributes:
+      label: Required textarea
+      description: This field must be filled in to submit the form.
+    validations:
+      required: true
+
+  - type: textarea
+    id: rendered-code
+    attributes:
+      label: Textarea rendered as a code block
+      description: |
+        With `render: shell`, the submitted content is wrapped in a fenced code block on the resulting issue.
+      render: shell
+      placeholder: |
+        $ command --flag
+        # paste output here
+
+  - type: textarea
+    id: with-default
+    attributes:
+      label: Textarea with a default value
+      value: |-
+        <details>
+
+        ```console
+        # paste output here
+        ```
+
+        </details>

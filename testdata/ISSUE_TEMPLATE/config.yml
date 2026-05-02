@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://example.com
+    about: Please take a look to our documentation.
+  - name: ❓ Questions
+    url: https://example.com/discussions
+    about: If you have a question, or are looking for advice, please post on our Discussions forum!
+

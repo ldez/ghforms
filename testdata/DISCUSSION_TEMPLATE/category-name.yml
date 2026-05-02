@@ -1,0 +1,68 @@
+title: Discussion Example 01
+body:
+  - type: checkboxes
+    id: optional
+    attributes:
+      label: Optional checkboxes
+      description: None of these need to be ticked to submit the form.
+      options:
+        - label: First option
+        - label: Second option
+        - label: Third option
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Terms (with required options)
+      description: Each option marked as required must be ticked.
+      options:
+        - label: I have read the [contributing guide](https://example.com).
+          required: true
+        - label: I have searched [existing issues](https://example.com) and didn't find a duplicate.
+          required: true
+        - label: I'd like to help triage this issue (optional).
+
+  - type: dropdown
+    id: with-default
+    attributes:
+      label: Dropdown with an explicit default
+      description: The `default` attribute is the zero-based index of the pre-selected option.
+      options:
+        - Apple
+        - Banana
+        - Cherry
+      default: 2
+
+  - type: dropdown
+    id: multi
+    attributes:
+      label: Multi-select dropdown
+      description: |
+        With `multiple: true`, the user can pick any number of options.
+      multiple: true
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!NOTE]
+        > Useful information that users should know, even when skimming content.
+
+  - type: textarea
+    id: simple
+    attributes:
+      label: Simple textarea
+      description: Plain multi-line input.
+      placeholder: Type your description here…
+
+  - type: upload
+    id: any
+    attributes:
+      label: Any file
+      description: No restriction on the type of file.
