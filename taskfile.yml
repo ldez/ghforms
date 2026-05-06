@@ -1,0 +1,45 @@
+version: "3"
+
+env:
+  CGO_ENABLED: 0
+
+tasks:
+  default:
+    deps: [clean, lint, test, generate, build]
+
+  clean:
+    cmds:
+      - rm -rf cover.out
+
+  generate:
+    cmds:
+      - go generate ./...
+
+  build:
+    deps: [clean]
+    cmds:
+      - go build -ldflags "-s -w" -trimpath
+
+  install:
+    deps: [clean, generate]
+    cmds:
+      - go install -ldflags "-s -w" -trimpath
+
+  test:
+    deps: [clean]
+    cmds:
+      - go test -v -cover ./...
+
+  lint:
+    cmds:
+      - golangci-lint run
+
+  serve:issues:
+    deps: [generate]
+    cmds:
+      - go run . --dir testdata/ISSUE_TEMPLATE/
+
+  serve:discussions:
+    deps: [generate]
+    cmds:
+      - go run . --dir testdata/DISCUSSION_TEMPLATE
