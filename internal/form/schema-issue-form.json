@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://golangci.org/schemas/github-issue-form.json",
+  "title": "GitHub Issue Form",
+  "description": "JSON schema for GitHub's issue form schema. See https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description", "body"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The name of the template."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Description of the issue template."
+    },
+    "title": {
+      "type": "string",
+      "description": "A default title that will be pre-populated in the issue submission form."
+    },
+    "body": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/element" }
+    },
+    "assignees": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "labels": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "projects": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "type": { "type": "string" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "element": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["markdown", "textarea", "input", "dropdown", "checkboxes", "upload"]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "markdown" } }, "required": ["type"] },
+          "then": { "$ref": "#/$defs/markdown" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "textarea" } }, "required": ["type"] },
+          "then": { "$ref": "#/$defs/textarea" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "input" } }, "required": ["type"] },
+          "then": { "$ref": "#/$defs/input" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "dropdown" } }, "required": ["type"] },
+          "then": { "$ref": "#/$defs/dropdown" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "checkboxes" } }, "required": ["type"] },
+          "then": { "$ref": "#/$defs/checkboxes" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "upload" } }, "required": ["type"] },
+          "then": { "$ref": "#/$defs/upload" }
+        }
+      ]
+    },
+    "markdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "attributes"],
+      "properties": {
+        "type": { "const": "markdown" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value"],
+          "properties": {
+            "value": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "textarea": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "attributes"],
+      "properties": {
+        "type": { "const": "textarea" },
+        "id": { "$ref": "#/$defs/id" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "description": { "type": "string" },
+            "placeholder": { "type": "string" },
+            "value": { "type": "string" },
+            "render": { "type": "string", "minLength": 1 }
+          }
+        },
+        "validations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "required": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "attributes"],
+      "properties": {
+        "type": { "const": "input" },
+        "id": { "$ref": "#/$defs/id" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "description": { "type": "string" },
+            "placeholder": { "type": "string" },
+            "value": { "type": "string" }
+          }
+        },
+        "validations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "required": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "dropdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "attributes"],
+      "properties": {
+        "type": { "const": "dropdown" },
+        "id": { "$ref": "#/$defs/id" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "options"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "description": { "type": "string" },
+            "multiple": { "type": "boolean" },
+            "options": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "default": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "validations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "required": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "checkboxes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "attributes"],
+      "properties": {
+        "type": { "const": "checkboxes" },
+        "id": { "$ref": "#/$defs/id" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "options"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "description": { "type": "string" },
+            "options": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["label"],
+                "properties": {
+                  "label": { "type": "string", "minLength": 1 },
+                  "required": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        },
+        "validations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "required": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "upload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "attributes"],
+      "properties": {
+        "type": { "const": "upload" },
+        "id": { "$ref": "#/$defs/id" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "description": { "type": "string" }
+          }
+        },
+        "validations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "required": { "type": "boolean" },
+            "accept": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

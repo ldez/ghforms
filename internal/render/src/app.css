@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@import "./callouts.css";
+@import "./multi-dropdown.css";
+
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+/* Scan the Go templates for the utility classes that need to be emitted. */
+@source "../templates";
+
+@theme {
+  --color-gh-fg: #1f2328;
+  --color-gh-muted: #59636e;
+  --color-gh-canvas: #ffffff;
+  --color-gh-subtle: #f6f8fa;
+  --color-gh-border: #d0d7de;
+  --color-gh-accent: #0969da;
+  --color-gh-danger: #d1242f;
+  --color-gh-header: #24292f;
+  --color-gh-btn: #1f883d;
+  --color-gh-btnHover: #1a7f37;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    monospace;
+}
+
+

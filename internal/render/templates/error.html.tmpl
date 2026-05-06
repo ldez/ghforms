@@ -1,0 +1,17 @@
+{{define "content"}}
+<div class="bg-white border border-red-300 rounded-md overflow-hidden">
+  <div class="bg-red-50 border-b border-red-300 px-4 py-3 flex items-start gap-3">
+    <span class="text-2xl leading-none">⚠️</span>
+    <div>
+      <h1 class="m-0 text-lg font-semibold text-red-700">Failed to load issue forms</h1>
+      <p class="m-0 text-sm text-red-700/90">
+        Fix the issue in the YAML file — the page will reload automatically when you save.
+      </p>
+    </div>
+  </div>
+  <pre class="m-0 p-4 text-[13px] leading-5 font-mono whitespace-pre-wrap break-words text-gh-fg bg-gh-subtle border-t border-red-200">{{.Err}}</pre>
+  <div class="px-4 py-3 text-xs text-gh-muted border-t border-red-200 bg-white">
+    Watching <code class="font-mono bg-black/5 px-1 rounded">{{.Dir}}</code> for changes.
+  </div>
+</div>
+{{end}}

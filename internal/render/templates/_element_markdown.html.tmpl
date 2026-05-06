@@ -1,0 +1,6 @@
+{{define "element-markdown"}}
+{{$el := .}}
+<div class="mb-5 prose prose-sm max-w-none [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_a]:text-gh-accent">
+  {{markdown $el.Attributes.Value}}
+</div>
+{{end}}

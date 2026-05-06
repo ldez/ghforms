@@ -1,0 +1,17 @@
+{{define "element-upload"}}
+{{$el := .}}
+<div class="mb-5">
+  <label for="el-{{$el.ID}}" class="{{template "label-classes"}}">
+    {{$el.Attributes.Label}}{{if $el.Validations.Required}}{{template "required-mark"}}{{end}}
+  </label>
+  {{if $el.Attributes.Description}}
+    <div class="{{template "desc-classes"}}">{{markdown $el.Attributes.Description}}</div>
+  {{end}}
+  <input id="el-{{$el.ID}}" name="{{$el.ID}}" type="file" multiple
+         {{if $el.Validations.Accept}}accept="{{$el.Validations.Accept}}"{{end}}
+         {{if $el.Validations.Required}}required{{end}}
+         class="block w-full text-sm text-gh-fg
+                file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border file:border-gh-border
+                file:bg-gh-subtle file:text-sm file:font-medium hover:file:bg-gray-100">
+</div>
+{{end}}

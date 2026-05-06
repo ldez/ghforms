@@ -1,0 +1,4 @@
+/* Hiding native <details> markers (needed for the multi-select dropdown). */
+summary.no-marker { list-style: none; }
+summary.no-marker::-webkit-details-marker { display: none; }
+summary.no-marker::marker { content: ""; }

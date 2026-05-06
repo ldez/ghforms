@@ -1,0 +1,16 @@
+{{define "element-input"}}
+{{$el := .}}
+<div class="mb-5">
+  <label for="el-{{$el.ID}}" class="{{template "label-classes"}}">
+    {{$el.Attributes.Label}}{{if $el.Validations.Required}}{{template "required-mark"}}{{end}}
+  </label>
+  {{if $el.Attributes.Description}}
+    <div class="{{template "desc-classes"}}">{{markdown $el.Attributes.Description}}</div>
+  {{end}}
+  <input id="el-{{$el.ID}}" name="{{$el.ID}}" type="text"
+         value="{{$el.Attributes.Value}}"
+         placeholder="{{$el.Attributes.Placeholder}}"
+         {{if $el.Validations.Required}}required{{end}}
+         class="{{template "input-classes"}}">
+</div>
+{{end}}

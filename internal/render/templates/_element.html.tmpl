@@ -1,0 +1,19 @@
+{{/* Reusable utility class strings shared by all element templates. */}}
+{{define "input-classes"}}block w-full px-3 py-1.5 text-sm leading-5 text-gh-fg bg-white border border-gh-border rounded-md focus:border-gh-accent focus:outline-none focus:ring-2 focus:ring-gh-accent/30{{end}}
+
+{{define "label-classes"}}block text-sm font-semibold mb-1.5{{end}}
+
+{{define "desc-classes"}}prose prose-sm max-w-none text-gh-muted text-[13px] mb-2 [&_p]:my-0 [&_a]:text-gh-accent{{end}}
+
+{{define "required-mark"}}<span class="text-gh-danger ml-0.5">*</span>{{end}}
+
+{{define "element"}}
+{{$el := .}}
+{{if eq $el.Type "markdown"}}{{template "element-markdown" $el}}
+{{else if eq $el.Type "input"}}{{template "element-input" $el}}
+{{else if eq $el.Type "textarea"}}{{template "element-textarea" $el}}
+{{else if eq $el.Type "dropdown"}}{{template "element-dropdown" $el}}
+{{else if eq $el.Type "checkboxes"}}{{template "element-checkboxes" $el}}
+{{else if eq $el.Type "upload"}}{{template "element-upload" $el}}
+{{end}}
+{{end}}

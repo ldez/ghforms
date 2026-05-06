@@ -26,6 +26,7 @@ linters:
     - tparallel
     - varnamelen
     - wsl # Deprecated
+    - gomodguard # Deprecated
     - wrapcheck # must be enabled in the future
     - mnd # must be enabled in the future
 
@@ -44,6 +45,7 @@ linters:
     goconst:
       min-len: 3
       min-occurrences: 3
+      ignore-tests: true
     gocritic:
       disabled-checks:
         - paramTypeCombine

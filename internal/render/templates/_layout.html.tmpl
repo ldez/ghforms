@@ -1,0 +1,46 @@
+{{define "page"}}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Title}}</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script defer src="/static/multi-dropdown.js"></script>
+  <script>
+    // Live-reload: refresh the page whenever the server signals that a YAML file changed (via Server-Sent Events).
+    (function () {
+      try {
+        const es = new EventSource('/__events');
+        es.addEventListener('reload', function () { location.reload(); });
+        es.onerror = function () { /* let the browser auto-reconnect */ };
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
+</head>
+<body class="bg-gh-subtle text-gh-fg font-sans text-sm leading-6 m-0 antialiased">
+  <nav class="fixed top-0 inset-x-0 h-14 bg-gh-header text-white z-50 shadow">
+    <div class="flex items-center h-full px-4 gap-4 overflow-x-auto">
+      <a href="/" class="text-white font-semibold text-base whitespace-nowrap hover:opacity-90 hover:no-underline">📝 Issue Forms Preview</a>
+      <ul class="list-none m-0 p-0 flex gap-1 items-center flex-1">
+        {{range .Forms}}
+          <li>
+            <a href="/forms/{{.Slug}}"
+               class="px-3 py-1.5 rounded-md whitespace-nowrap text-[13px] hover:bg-white/10 hover:text-white hover:no-underline
+                      {{if eq $.Slug .Slug}}bg-white/20 text-white{{else}}text-white/80{{end}}">
+              {{.Name}}
+            </a>
+          </li>
+        {{end}}
+      </ul>
+    </div>
+  </nav>
+  <main class="max-w-3xl mx-auto pt-[88px] pb-16 px-4">
+    {{template "content" .}}
+  </main>
+  <a href="https://donate.ldez.dev" target="_blank" rel="noopener noreferrer"
+     class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full shadow-lg bg-gh-btn hover:bg-gh-btnHover text-white text-sm font-medium transition-transform hover:scale-105">
+    ❤️ Donate
+  </a>
+</body>
+</html>
+{{end}}

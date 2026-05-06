@@ -1,0 +1,21 @@
+{{define "element-checkboxes"}}
+{{$el := .}}
+<fieldset class="mb-5 border-0 p-0 m-0 mb-5 flex flex-col">
+  <legend class="{{template "label-classes"}} p-0">
+    {{$el.Attributes.Label}}{{if $el.Validations.Required}}{{template "required-mark"}}{{end}}
+  </legend>
+  {{if $el.Attributes.Description}}
+    <div class="{{template "desc-classes"}}">{{markdown $el.Attributes.Description}}</div>
+  {{end}}
+  {{range $i, $opt := $el.Attributes.Options}}
+    <label class="flex items-start gap-2 py-1 cursor-pointer font-normal">
+      <input type="checkbox" name="{{$el.ID}}[]" value="{{$opt.Label}}"
+             {{if $opt.Required}}required{{end}}
+             class="mt-1 shrink-0">
+      <span class="[&_a]:text-gh-accent [&_a]:hover:underline">
+        {{markdownLine $opt.Label}}{{if $opt.Required}} <span class="text-gh-danger" title="required">*</span>{{end}}
+      </span>
+    </label>
+  {{end}}
+</fieldset>
+{{end}}

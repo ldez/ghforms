@@ -1,0 +1,37 @@
+{{define "content"}}
+{{$form := .Form}}
+<div class="bg-white border border-gh-border rounded-md p-6">
+  <div class="mb-6 pb-4 border-b border-gh-border">
+    <a href="/" class="text-[13px] text-gh-accent hover:underline">← All templates</a>
+    <h1 class="my-2 text-[22px] font-semibold">{{$form.Name}}</h1>
+    <p class="text-gh-muted m-0">{{$form.Description}}</p>
+  </div>
+
+  <form>
+    <div class="mb-5">
+      <label for="issue-title" class="block text-sm font-semibold mb-1.5">
+        Add a title <span class="text-gh-danger ml-0.5">*</span>
+      </label>
+      <input id="issue-title" name="title" type="text" required
+             value="{{$form.Title}}"
+             class="block w-full px-3 py-1.5 text-sm leading-5 text-gh-fg bg-white border border-gh-border rounded-md focus:border-gh-accent focus:outline-none focus:ring-2 focus:ring-gh-accent/30">
+    </div>
+
+    {{range $i, $el := $form.Body}}
+      {{template "element" $el}}
+    {{end}}
+
+    <div class="mt-7 pt-4 border-t border-gh-border flex justify-end gap-2">
+      <button type="reset"
+              title="Reset form"
+              class="inline-block px-4 py-1.5 text-sm font-medium leading-5 rounded-md border border-gh-border bg-white hover:bg-gh-canvas text-gh-fg">
+        Cancel
+      </button>
+      <button type="submit"
+              class="inline-block px-4 py-1.5 text-sm font-medium leading-5 rounded-md border border-black/15 bg-gh-btn hover:bg-gh-btnHover text-white">
+        Create
+      </button>
+    </div>
+  </form>
+</div>
+{{end}}

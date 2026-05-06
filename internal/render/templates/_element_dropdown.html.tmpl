@@ -1,0 +1,48 @@
+{{define "element-dropdown"}}
+{{$el := .}}
+
+<div class="mb-5">
+  <label for="el-{{$el.ID}}" class="{{template "label-classes"}}">
+    {{$el.Attributes.Label}}{{if $el.Validations.Required}}{{template "required-mark"}}{{end}}
+  </label>
+  {{if $el.Attributes.Description}}
+    <div class="{{template "desc-classes"}}">{{markdown $el.Attributes.Description}}</div>
+  {{end}}
+  {{if $el.Attributes.Multiple}}
+    {{/* Multi-select rendered to look identical to a single dropdown. */}}
+    <div class="relative">
+      <details class="multi-dropdown relative group" data-id="el-{{$el.ID}}">
+        <summary role="button" aria-haspopup="listbox"
+                 class="no-marker {{template "input-classes"}} flex items-center justify-between cursor-pointer select-none
+                        group-open:border-gh-accent group-open:ring-2 group-open:ring-gh-accent/30">
+          <span class="multi-dropdown-placeholder flex-1 truncate text-gh-muted">Select options</span>
+          <span class="ml-2 text-gh-muted text-xs" aria-hidden="true">▾</span>
+        </summary>
+        <div role="listbox" aria-multiselectable="true"
+             class="absolute left-0 right-0 top-[calc(100%+4px)] z-40 max-h-64 overflow-y-auto bg-white border border-gh-border rounded-md shadow-lg py-1">
+          {{range $i, $opt := $el.Attributes.Options}}
+            <label class="flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer hover:bg-gh-subtle">
+              <input type="checkbox" name="{{$el.ID}}[]" value="{{$opt.Label}}"
+                     class="m-0">
+              <span>{{$opt.Label}}</span>
+            </label>
+          {{end}}
+        </div>
+      </details>
+      {{if $el.Validations.Required}}
+        <input type="text" tabindex="-1" aria-hidden="true" required
+               class="multi-dropdown-required absolute left-0 top-0 w-full h-9 p-0 m-0 border-0 bg-transparent text-transparent opacity-0 pointer-events-none">
+      {{end}}
+    </div>
+  {{else}}
+    {{$selectedIdx := $el.Attributes.Default}}
+    <select id="el-{{$el.ID}}" name="{{$el.ID}}"
+            {{if $el.Validations.Required}}required{{end}}
+            class="{{template "input-classes"}} pr-7">
+      {{range $i, $opt := $el.Attributes.Options}}
+        <option value="{{$opt.Label}}" {{if eq $i $selectedIdx}}selected{{ end }}>{{$opt.Label}}</option>
+      {{end}}
+    </select>
+  {{end}}
+</div>
+{{end}}

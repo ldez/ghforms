@@ -1,0 +1,20 @@
+{{define "element-textarea"}}
+{{$el := .}}
+<div class="mb-5">
+  <label for="el-{{$el.ID}}" class="{{template "label-classes"}}">
+    {{$el.Attributes.Label}}{{if $el.Validations.Required}}{{template "required-mark"}}{{end}}
+  </label>
+  {{if $el.Attributes.Description}}
+    <div class="{{template "desc-classes"}}">{{markdown $el.Attributes.Description}}</div>
+  {{end}}
+  <textarea id="el-{{$el.ID}}" name="{{$el.ID}}" rows="6"
+            placeholder="{{$el.Attributes.Placeholder}}"
+            {{if $el.Validations.Required}}required{{end}}
+            class="{{template "input-classes"}} min-h-[120px] resize-y {{if $el.Attributes.Render}}font-mono text-[13px] bg-gh-subtle{{end}}">{{$el.Attributes.Value}}</textarea>
+  {{if $el.Attributes.Render}}
+    <div class="text-xs text-gh-muted mt-1">
+      Rendered as <code class="font-mono bg-black/5 px-1 rounded">{{$el.Attributes.Render}}</code> code block on submit.
+    </div>
+  {{end}}
+</div>
+{{end}}

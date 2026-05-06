@@ -1,0 +1,53 @@
+/* GitHub-style alerts (callouts) rendered from blockquotes.
+   See: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts
+
+   These rules are intentionally NOT wrapped in `@layer components`. The
+   `@tailwindcss/typography` plugin emits its `.prose :where(...)` rules
+   unlayered (at the root cascade level). Anything we put inside
+   `@layer components` would always lose to those unlayered prose rules,
+   regardless of specificity. Keeping the callouts unlayered (and matching
+   prose's specificity where needed) lets source order decide the cascade
+   in our favor. */
+.callout {
+  @apply my-4 px-4 py-2 border-l-[0.25em] rounded-r-md;
+  border-color: var(--color-gh-border);
+  background-color: transparent;
+  color: var(--color-gh-fg);
+}
+.callout > :first-child { @apply mt-0; }
+.callout > :last-child  { @apply mb-0; }
+
+.callout-title {
+  @apply flex items-center gap-2 font-semibold mt-0 mb-1;
+}
+.callout-title svg {
+  @apply w-4 h-4 shrink-0 fill-current;
+}
+/* Override prose's `:where(p)` (specificity 0,1,1) — chain a class so we
+   match its specificity and win on source order. */
+.callout .callout-title-text,
+.callout-title p.callout-title-text { @apply m-0; }
+
+.callout-body { color: var(--color-gh-fg); }
+.callout-body > :first-child { @apply mt-0; }
+.callout-body > :last-child  { @apply mb-0; }
+/* Tighten paragraph spacing inside the body — prose would otherwise apply
+   1.25em top/bottom margins to every <p>. */
+.callout-body p { @apply my-1; }
+.callout-body > p:first-child { @apply mt-0; }
+.callout-body > p:last-child  { @apply mb-0; }
+
+.callout-note      { @apply border-l-[#0969da]; }
+.callout-note      .callout-title { @apply text-[#0969da]; }
+
+.callout-tip       { @apply border-l-[#1a7f37]; }
+.callout-tip       .callout-title { @apply text-[#1a7f37]; }
+
+.callout-important { @apply border-l-[#8250df]; }
+.callout-important .callout-title { @apply text-[#8250df]; }
+
+.callout-warning   { @apply border-l-[#9a6700]; }
+.callout-warning   .callout-title { @apply text-[#9a6700]; }
+
+.callout-caution   { @apply border-l-[#d1242f]; }
+.callout-caution   .callout-title { @apply text-[#d1242f]; }

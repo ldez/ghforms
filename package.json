@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "build:css": "tailwindcss -i internal/render/src/app.css -o internal/render/static/app.css --minify",
+    "watch:css": "tailwindcss -i internal/render/src/app.css -o internal/render/static/app.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "tailwindcss": "^4.2.4"
+  }
+}
