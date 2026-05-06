@@ -1,0 +1,149 @@
+version: "2"
+
+linters:
+  default: all
+  disable:
+    - bodyclose
+    - contextcheck
+    - cyclop
+    - dupl
+    - err113
+    - exhaustive
+    - exhaustruct
+    - forbidigo
+    - gosmopolitan
+    - ireturn
+    - lll
+    - makezero
+    - nestif
+    - nilnil
+    - nlreturn
+    - paralleltest
+    - prealloc
+    - rowserrcheck
+    - sqlclosecheck
+    - testpackage
+    - tparallel
+    - varnamelen
+    - wsl # Deprecated
+    - wrapcheck # must be enabled in the future
+    - mnd # must be enabled in the future
+
+  settings:
+    depguard:
+      rules:
+        main:
+          deny:
+            - pkg: github.com/instana/testify
+              desc: not allowed
+            - pkg: github.com/pkg/errors
+              desc: Should be replaced by standard lib errors package
+    funlen:
+      lines: -1
+      statements: 50
+    goconst:
+      min-len: 3
+      min-occurrences: 3
+    gocritic:
+      disabled-checks:
+        - paramTypeCombine
+        - whyNoLint
+        - unnamedResult
+        - hugeParam
+        - sloppyReassign
+        - rangeValCopy
+        - octalLiteral
+        - ptrToRefParam
+        - appendAssign
+        - ruleguard
+        - httpNoBody
+        - exposedSyncMutex
+      enabled-tags:
+        - diagnostic
+        - style
+        - performance
+    gocyclo:
+      min-complexity: 12
+    godox:
+      keywords:
+        - FIXME
+    gosec:
+      excludes:
+        - G104 # Errors unhandled
+        - G112 # Potential Slowloris Attack because ReadHeaderTimeout is not configured in the http.Server
+        - G203 # The used method does not auto-escape HTML
+        - G304 # Potential file inclusion via variable
+    govet:
+      enable:
+        - shadow
+    misspell:
+      locale: US
+    perfsprint:
+      err-error: true
+      errorf: true
+      sprintf1: true
+      strconcat: false
+    revive:
+      rules:
+        - name: struct-tag
+        - name: blank-imports
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: dot-imports
+        - name: error-return
+        - name: error-strings
+        - name: error-naming
+        - name: exported
+          disabled: true
+        - name: if-return
+        - name: increment-decrement
+        - name: var-naming
+        - name: var-declaration
+        - name: package-comments
+          disabled: true
+        - name: range
+        - name: receiver-naming
+        - name: time-naming
+        - name: unexported-return
+        - name: indent-error-flow
+        - name: errorf
+        - name: empty-block
+        - name: superfluous-else
+        - name: unused-parameter
+          disabled: true
+        - name: unreachable-code
+        - name: redefines-builtin-id
+    tagalign:
+      align: false
+      order:
+        - xml
+        - json
+        - yaml
+        - yml
+        - toml
+        - mapstructure
+        - url
+    testifylint:
+      disable:
+        - go-require
+  exclusions:
+    warn-unused: true
+    presets:
+      - comments
+      - std-error-handling
+    rules:
+      - path: (.+)_test.go
+        linters:
+          - funlen
+          - goconst
+          - maintidx
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+formatters:
+  enable:
+    - gci
+    - gofumpt
+    - goimports
