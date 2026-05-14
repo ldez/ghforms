@@ -1,0 +1,41 @@
+name: 💡 Feature request
+description: Suggest an idea for this project.
+body:
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Welcome
+      options:
+        - label: Yes, I'm using the [latest available release](https://github.com/ldez/ghforms/releases).
+          required: true
+        - label: Yes, I've searched for similar issues on GitHub and didn't find any.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Detailed Description
+      placeholder: Description.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Effective version
+      description: "`latest` or `dev` are NOT effective versions."
+      placeholder: "e.g. v4.21.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: value-affirmation
+    attributes:
+      label: 🌱 Supporting the Maintainer
+      options:
+        - label: "Yes, I find this project useful, and it has saved me time in my workflow/business."
+          required: false
+        - label: "Yes, I have [starred](https://github.com/ldez/ghforms) this repository to help others find it."
+          required: false
+        - label: "Yes, I have [sponsored](https://donate.ldez.dev) this project to keep the project stable and maintained."
+          required: false

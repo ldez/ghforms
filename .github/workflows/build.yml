@@ -1,0 +1,47 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+
+  cross:
+    name: Go
+    runs-on: ${{ matrix.os }}
+    env:
+      CGO_ENABLED: 0
+
+    strategy:
+      matrix:
+        go-version: [stable]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Setup
+        run: npm install
+
+      - name: Generate
+        run: make generate
+
+      - name: Test
+        run: go test -v -cover ./...
+
+      - name: Test (verify)
+        run: make verify
+
+      - name: Build
+        run: go build -v -ldflags "-s -w" -trimpath
