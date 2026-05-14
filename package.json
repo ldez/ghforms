@@ -1,4 +1,5 @@
 {
+  "name": "ghforms",
   "scripts": {
     "build:css": "tailwindcss -i internal/render/src/app.css -o internal/render/static/app.css --minify",
     "watch:css": "tailwindcss -i internal/render/src/app.css -o internal/render/static/app.css --watch"

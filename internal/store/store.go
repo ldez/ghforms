@@ -5,7 +5,7 @@ package store
 import (
 	"sync"
 
-	"github.com/ldez/githubformpreview/internal/form"
+	"github.com/ldez/ghforms/internal/form"
 )
 
 type Loader interface {

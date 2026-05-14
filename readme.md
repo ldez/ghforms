@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/logo.svg" alt="githubformpreview logo">
+  <img src="docs/logo.svg" alt="ghforms logo">
   <p>A tool to preview and validate GitHub forms (issues and discussions).</p>
 </div>
 
@@ -24,17 +24,17 @@ The style of the form pages is close to GitHub, but not exactly the same.
 ## Installation
 
 ```bash
-go install github.com/ldez/githubformpreview@latest
+go install github.com/ldez/ghforms@latest
 ```
 
-or download the binary from the [releases](https://github.com/ldez/githubformpreview/releases) page.
+or download the binary from the [releases](https://github.com/ldez/ghforms/releases) page.
 
 ## Usage
 
 ### Live Preview and Validation
 
 ```bash
-githubformpreview [-addr :8080] [-dir .github/ISSUE_TEMPLATE]
+ghforms [-addr :8080] [-dir .github/ISSUE_TEMPLATE]
 ```
 
 | Flag    | Default                  | Description                 |
@@ -47,25 +47,25 @@ githubformpreview [-addr :8080] [-dir .github/ISSUE_TEMPLATE]
 By default, it looks for the forms inside the `.github/ISSUE_TEMPLATE` directory (non-recursive).
 
 ```bash
-githubformpreview
+ghforms
 ```
 
 If you want to use a different directory:
 
 ```bash
-githubformpreview -dir .github/DISCUSSION_TEMPLATE
+ghforms -dir .github/DISCUSSION_TEMPLATE
 ```
 
 If you want to use a different port:
 
 ```bash
-githubformpreview -addr ':8686'
+ghforms -addr ':8686'
 ```
 
 ### Only Validate the Forms
 
 ```bash
-githubformpreview verify [-dir .github]
+ghforms verify [-dir .github]
 ```
 
 | Flag   | Default    | Description                             |
@@ -77,7 +77,7 @@ githubformpreview verify [-dir .github]
 By default, it looks for the forms inside the `.github` directory (recursive).
 
 ```bash
-githubformpreview verify
+ghforms verify
 ```
 
 ## References

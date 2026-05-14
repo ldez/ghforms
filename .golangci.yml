@@ -15,6 +15,7 @@ linters:
     - ireturn
     - lll
     - makezero
+    - mnd
     - nestif
     - nilnil
     - nlreturn
@@ -25,10 +26,9 @@ linters:
     - testpackage
     - tparallel
     - varnamelen
+    - wrapcheck
     - wsl # Deprecated
     - gomodguard # Deprecated
-    - wrapcheck # must be enabled in the future
-    - mnd # must be enabled in the future
 
   settings:
     depguard:

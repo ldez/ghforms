@@ -10,8 +10,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ldez/githubformpreview/internal"
-	"github.com/ldez/githubformpreview/internal/form"
+	"github.com/ldez/ghforms/internal"
+	"github.com/ldez/ghforms/internal/form"
 	"github.com/mattn/go-isatty"
 	"github.com/urfave/cli/v3"
 	"gitlab.com/greyxor/slogor"
@@ -36,7 +36,7 @@ func main() {
 	app.Version = version
 
 	cli.VersionPrinter = func(cmd *cli.Command) {
-		fmt.Printf("githubformpreview version %s %s/%s\n", cmd.Version, runtime.GOOS, runtime.GOARCH)
+		fmt.Printf("%s version %s %s/%s\n", app.Name, cmd.Version, runtime.GOOS, runtime.GOARCH)
 	}
 
 	err := app.Run(context.Background(), os.Args)
@@ -49,7 +49,7 @@ func main() {
 
 func createRootCommand() *cli.Command {
 	return &cli.Command{
-		Name:                  "githubformpreview",
+		Name:                  "ghforms",
 		Usage:                 "GitHub Forms Live Preview and Validation (Issues and Discussions)",
 		EnableShellCompletion: true,
 		Flags: []cli.Flag{

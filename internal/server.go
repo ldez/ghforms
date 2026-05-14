@@ -13,10 +13,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ldez/githubformpreview/internal/form"
-	"github.com/ldez/githubformpreview/internal/render"
-	"github.com/ldez/githubformpreview/internal/store"
-	"github.com/ldez/githubformpreview/internal/watcher"
+	"github.com/ldez/ghforms/internal/form"
+	"github.com/ldez/ghforms/internal/render"
+	"github.com/ldez/ghforms/internal/store"
+	"github.com/ldez/ghforms/internal/watcher"
 )
 
 // Run starts the HTTP server.

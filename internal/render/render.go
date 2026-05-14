@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/ldez/githubformpreview/internal/form"
-	"github.com/ldez/githubformpreview/internal/store"
+	"github.com/ldez/ghforms/internal/form"
+	"github.com/ldez/ghforms/internal/store"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	alertcallouts "github.com/zmtcreative/gm-alert-callouts"
@@ -79,7 +79,7 @@ func (r *Renderer) Index(rw http.ResponseWriter) error {
 	}
 
 	return r.executePage(rw, r.indexTemplate, Data{
-		Title: "Issue Forms Preview",
+		Title: "Forms Preview",
 		Forms: snap.Forms,
 	})
 }
@@ -98,7 +98,7 @@ func (r *Renderer) Form(rw http.ResponseWriter, slug string) error {
 	}
 
 	return r.executePage(rw, r.formTemplate, Data{
-		Title: f.Name + " - Issue Forms Preview",
+		Title: f.Name + " - Forms Preview",
 		Forms: snap.Forms,
 		Form:  f,
 		Slug:  slug,
@@ -109,7 +109,7 @@ func (r *Renderer) renderError(rw http.ResponseWriter, snap store.Snapshot) erro
 	rw.WriteHeader(http.StatusUnprocessableEntity)
 
 	return r.executePage(rw, r.errorTemplate, Data{
-		Title: "Error - Issue Forms Preview",
+		Title: "Error - Forms Preview",
 		Err:   snap.Err.Error(),
 		Dir:   r.store.Dir(),
 	})

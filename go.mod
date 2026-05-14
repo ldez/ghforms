@@ -1,4 +1,4 @@
-module github.com/ldez/githubformpreview
+module github.com/ldez/ghforms
 
 go 1.25.0
 
