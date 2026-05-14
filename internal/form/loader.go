@@ -13,6 +13,7 @@ import (
 type Loader struct {
 	issueValidator      *SchemaValidator
 	discussionValidator *SchemaValidator
+	chooserValidator    *SchemaValidator
 }
 
 func New() (*Loader, error) {
@@ -26,9 +27,15 @@ func New() (*Loader, error) {
 		return nil, err
 	}
 
+	chooserValidator, err := NewSchemaChooserValidator()
+	if err != nil {
+		return nil, err
+	}
+
 	return &Loader{
 		issueValidator:      issueValidator,
 		discussionValidator: discussionValidator,
+		chooserValidator:    chooserValidator,
 	}, nil
 }
 
@@ -57,9 +64,7 @@ func (l *Loader) Load(dir string) ([]*Form, error) {
 			continue
 		}
 
-		if strings.EqualFold(strings.TrimSuffix(name, ext), "config") {
-			continue
-		}
+		isDiscussion := strings.Contains(dir, "DISCUSSION_TEMPLATE")
 
 		path := filepath.Join(dir, name)
 
@@ -68,36 +73,19 @@ func (l *Loader) Load(dir string) ([]*Form, error) {
 			return nil, fmt.Errorf("read %s: %w", path, err)
 		}
 
-		isDiscussion := strings.Contains(dir, "DISCUSSION_TEMPLATE")
+		if !isDiscussion && strings.EqualFold(strings.TrimSuffix(name, ext), "config") {
+			err = l.chooserValidator.validate(path, data)
+			if err != nil {
+				return nil, err
+			}
 
-		err = l.getValidator(isDiscussion).validate(path, data)
+			continue
+		}
+
+		form, err := l.validateForm(isDiscussion, name, path, data)
 		if err != nil {
 			return nil, err
 		}
-
-		form := new(Form)
-
-		err = yaml.Unmarshal(data, form)
-		if err != nil {
-			return nil, fmt.Errorf("parse %s: %w", path, err)
-		}
-
-		form.Filename = name
-		form.Slug = strings.TrimSuffix(name, filepath.Ext(name))
-
-		if isDiscussion {
-			form.Name = "💬 " + strings.TrimSuffix(name, filepath.Ext(name))
-			form.Description = "DISCUSSION_TEMPLATE"
-		}
-
-		err = semanticCheck(path, form)
-		if err != nil {
-			return nil, err
-		}
-
-		semanticWarnings(path, form)
-
-		addExtra(form)
 
 		forms = append(forms, form)
 	}
@@ -107,6 +95,39 @@ func (l *Loader) Load(dir string) ([]*Form, error) {
 	})
 
 	return forms, nil
+}
+
+func (l *Loader) validateForm(isDiscussion bool, name, path string, data []byte) (*Form, error) {
+	err := l.getValidator(isDiscussion).validate(path, data)
+	if err != nil {
+		return nil, err
+	}
+
+	form := new(Form)
+
+	err = yaml.Unmarshal(data, form)
+	if err != nil {
+		return nil, fmt.Errorf("parse %s: %w", path, err)
+	}
+
+	form.Filename = name
+	form.Slug = strings.TrimSuffix(name, filepath.Ext(name))
+
+	if isDiscussion {
+		form.Name = "💬 " + strings.TrimSuffix(name, filepath.Ext(name))
+		form.Description = "DISCUSSION_TEMPLATE"
+	}
+
+	err = semanticCheck(path, form)
+	if err != nil {
+		return nil, err
+	}
+
+	semanticWarnings(path, form)
+
+	addExtra(form)
+
+	return form, nil
 }
 
 func (l *Loader) getValidator(isDiscussion bool) *SchemaValidator {

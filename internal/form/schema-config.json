@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schema-config.json",
+  "title": "GitHub Issue Template Chooser Configuration",
+  "description": "JSON schema for GitHub's issue template chooser config.yml. See https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "blank_issues_enabled": {
+      "type": "boolean",
+      "description": "If set to false, encourage contributors to use issue templates. Defaults to true."
+    },
+    "contact_links": {
+      "type": "array",
+      "description": "Additional external links displayed in the issue chooser alongside the issue templates.",
+      "items": { "$ref": "#/$defs/contact_link" }
+    }
+  },
+  "$defs": {
+    "contact_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url", "about"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of the external element."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the external element."
+        },
+        "about": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A short description of the external element."
+        }
+      }
+    }
+  }
+}

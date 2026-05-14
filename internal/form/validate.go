@@ -17,6 +17,9 @@ var jsonSchemaIssueForm []byte
 //go:embed schema-discussion-form.json
 var jsonSchemaDiscussionForm []byte
 
+//go:embed schema-config.json
+var jsonSchemaChooser []byte
+
 type SchemaValidator struct {
 	schema *jsonschema.Schema
 }
@@ -32,6 +35,15 @@ func NewSchemaIssueValidator() (*SchemaValidator, error) {
 
 func NewSchemaDiscussionValidator() (*SchemaValidator, error) {
 	schema, err := getSchema(jsonSchemaDiscussionForm, "schema-discussion-form.json")
+	if err != nil {
+		return nil, err
+	}
+
+	return &SchemaValidator{schema: schema}, nil
+}
+
+func NewSchemaChooserValidator() (*SchemaValidator, error) {
+	schema, err := getSchema(jsonSchemaChooser, "schema-config.json")
 	if err != nil {
 		return nil, err
 	}
