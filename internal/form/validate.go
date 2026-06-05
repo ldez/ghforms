@@ -64,8 +64,7 @@ func (v *SchemaValidator) validate(source string, data []byte) error {
 		return nil
 	}
 
-	var ve *jsonschema.ValidationError
-	if errors.As(err, &ve) {
+	if ve, ok := errors.AsType[*jsonschema.ValidationError](err); ok {
 		return fmt.Errorf("%s: schema validation failed:\n%s", source, strings.TrimRight(ve.Error(), "\n"))
 	}
 

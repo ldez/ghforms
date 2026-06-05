@@ -22,8 +22,8 @@ github.com/zmtcreative/gm-alert-callouts v0.8.0 h1:UKvgwI6zIMJ1GrAcA4GSiAyLRMR/P
 github.com/zmtcreative/gm-alert-callouts v0.8.0/go.mod h1:Jww6xA2gBun+2A2TQwkYm5/tVEh1P88/4cMQFy9qnSo=
 gitlab.com/greyxor/slogor v1.6.10 h1:oJwdJjhbVjlko82YWXr5kaBeJCQ+nQ2qlcqLjp/wljU=
 gitlab.com/greyxor/slogor v1.6.10/go.mod h1:PMFCV6jvZltjjDTsV2oPMV+wJx9/AgvfCaA5p6ORdGg=
-golang.org/x/sys v0.44.0 h1:ildZl3J4uzeKP07r2F++Op7E9B29JRUy+a27EibtBTQ=
-golang.org/x/sys v0.44.0/go.mod h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=
+golang.org/x/sys v0.45.0 h1:dO4czNzziLiiXplLQgBCEpCvXQ3dnkn0SdaZSYdQ+FY=
+golang.org/x/sys v0.45.0/go.mod h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=
 golang.org/x/text v0.37.0 h1:Cqjiwd9eSg8e0QAkyCaQTNHFIIzWtidPahFWR83rTrc=
 golang.org/x/text v0.37.0/go.mod h1:a5sjxXGs9hsn/AJVwuElvCAo9v8QYLzvavO5z2PiM38=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
