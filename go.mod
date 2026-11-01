@@ -3,7 +3,6 @@ module github.com/ldez/ghforms
 go 1.26.0
 
 ignore (
-	./.github
 	./docs
 	./internal/render/src
 	./node_modules
